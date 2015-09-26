@@ -44,9 +44,10 @@ public interface IEncrypter {
      * Decrypts an encrypted pattern.
      *
      * @param context          the context.
+     * @param pattern          the pattern in the form of a list of {@link Cell}.
      * @param encryptedPattern the encrypted pattern.
-     * @return the original pattern.
+     * @return pattern match?
      */
-    List<Cell> decrypt(Context context, char[] encryptedPattern);
+    boolean decrypt(Context context, List<Cell> pattern, char[] encryptedPattern);
 
 }

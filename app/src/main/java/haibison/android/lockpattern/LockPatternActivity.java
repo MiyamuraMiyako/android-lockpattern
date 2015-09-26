@@ -675,7 +675,8 @@ public class LockPatternActivity extends Activity {
                         currentPattern = AlpSettings.Security.getPattern(LockPatternActivity.this);
                     if (currentPattern != null) {
                         if (mEncrypter != null)
-                            return pattern.equals(mEncrypter.decrypt(LockPatternActivity.this, currentPattern));
+                            return mEncrypter.decrypt(LockPatternActivity.this, pattern,
+                                                      currentPattern);
                         else
                             return Arrays.equals(currentPattern, LockPatternUtils.patternToSha1(pattern).toCharArray());
                     }
@@ -735,8 +736,8 @@ public class LockPatternActivity extends Activity {
                 @Override
                 protected Object doInBackground(Void... params) {
                     if (mEncrypter != null)
-                        return pattern.equals(mEncrypter.decrypt(LockPatternActivity.this, getIntent()
-                                .getCharArrayExtra(EXTRA_PATTERN)));
+                        return mEncrypter.decrypt(LockPatternActivity.this, pattern, getIntent()
+                                .getCharArrayExtra(EXTRA_PATTERN));
                     else
                         return Arrays.equals(getIntent().getCharArrayExtra(EXTRA_PATTERN),
                                 LockPatternUtils.patternToSha1(pattern).toCharArray());
